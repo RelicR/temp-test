@@ -1,0 +1,136 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	font-size: 50px; /* Возможно, стоит уменьшить для мобильных */
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden; /* Предотвращает прокрутку страницы */
+}
+
+.game-main {
+	height: 100vh;
+	width:100vw;
+	padding: 3rem 5rem;
+	display: flex;
+}
+
+.game-carousel {
+	flex-grow: 1;
+	max-height: 100%;
+	display: grid;
+	/* Изменяем сетку для десктопа */
+	grid-template-columns: repeat(3, 1fr);
+
+	/* Добавляем стили для скрытия/показа карточек */
+	overflow: hidden; /* Скрываем содержимое за пределами области */
+}
+
+.game-card {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	img {
+		transform: rotate(180deg);
+		width: 100%;
+		max-height: 100%;
+	}
+}
+
+.game-card:nth-child(1) {
+	.game-control {
+		align-items: flex-start;
+	}
+}
+.game-card:nth-child(2) {
+	img {
+		width: 90%;
+	}
+}
+.game-card:nth-child(3) {
+	.game-control {
+		align-items: flex-end;
+	}
+}
+
+.game-control {
+    display: flex;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translateX(-50%);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+	color: red;
+}
+
+button {
+	font-size: 35px; /* Возможно, стоит уменьшить для мобильных */
+	width: clamp(200px, 100%);
+}
+
+/* --- Новые стили для мобильных --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 30px; /* Уменьшаем размер шрифта */
+    }
+    button {
+        font-size: 20px; /* Уменьшаем размер шрифта кнопки */
+    }
+	
+	.game-main {
+		padding: 3rem 0;
+	}
+
+    /* Изменяем сетку для мобильных устройств */
+    .game-carousel {
+        /* Делаем ширину сетки равной 300% от одного элемента, чтобы поместить 3 карточки в ряд */
+        width: 300%;
+        grid-template-columns: repeat(3, 100%); /* 3 карточки в ряд */
+        transform: translateX(0); /* Начальное смещение */
+        transition: transform 0.3s ease-in-out; /* Плавный переход при смене слайда */
+    }
+
+
+    /* Скрываем все карточки по умолчанию */
+    .game-card {
+        opacity: 0.3; /* Делаем неактивные карточки полупрозрачными */
+        pointer-events: none; /* Отключаем взаимодействие с неактивными карточками */
+    }
+
+    /* Показываем активную карточку */
+    .game-carousel.show-card-0 .game-card:nth-child(1),
+    .game-carousel.show-card-1 .game-card:nth-child(2),
+    .game-carousel.show-card-2 .game-card:nth-child(3) {
+        opacity: 1; /* Делаем активную карточку непрозрачной */
+        pointer-events: auto; /* Включаем взаимодействие с активной карточкой */
+    }
+
+    /* Смещаем сетку для показа нужной карточки */
+    .game-carousel.show-card-0 {
+        transform: translateX(0%);
+    }
+    .game-carousel.show-card-1 {
+        transform: translateX(-100%);
+    }
+    .game-carousel.show-card-2 {
+        transform: translateX(-200%);
+    }
+}
+
+/* Дополнительный медиа-запрос для очень маленьких экранов */
+@media (max-width: 480px) {
+    body {
+        font-size: 20px; /* Еще уменьшаем размер шрифта */
+    }
+    button {
+        font-size: 16px; /* Еще уменьшаем размер шрифта кнопки */
+    }
+}
