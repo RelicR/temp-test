@@ -11,95 +11,31 @@
 </head>
 <body>
 	<div class="game-main">
-		<!-- Добавляем id для управления -->
-		<div id="gameCarousel" class="game-carousel">
-			<div class="game-card">
-				<img src="test1.png" alt="Wheel"/>
-				<div class="game-control">
-					<span>Колесо</span>
-					<button>Играть</button>
+		<div class="game-menu">
+			<div id="gameCarousel" class="game-carousel">
+				<div class="game-card" data-game="0">
+					<img src="test1.png" alt="Wheel"/>
+					<div class="game-control">
+						<span>Колесо</span>
+						<button>Играть</button>
+					</div>
 				</div>
-			</div>
-			<div class="game-card">
-				<img src="test2.png" alt="LootBox"/>
-				<div class="game-control">
-					<span>Лутбокс</span>
-					<button>Играть</button>
+				<div class="game-card" data-game="1">
+					<img src="test1.png" alt="LootBox"/>
+					<div class="game-control">
+						<span>Лутбокс</span>
+						<button>Играть</button>
+					</div>
 				</div>
-			</div>
-			<div class="game-card">
-				<img src="test1.png" alt="Slots"/>
-				<div class="game-control">
-					<span>Слоты</span>
-					<button>Играть</button>
+				<div class="game-card" data-game="2">
+					<img src="test1.png" alt="Slots"/>
+					<div class="game-control">
+						<span>Слоты</span>
+						<button>Играть</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- Добавляем скрипт -->
-	<script>
-		// Получаем элемент карусели
-		const carousel = document.getElementById('gameCarousel');
-		// Общее количество карточек
-		const totalCards = 3;
-		// Текущий индекс карточки (0, 1, 2)
-		let currentIndex = 0;
-
-		// Функция для обновления отображения карусели
-		function updateCarousel() {
-			// Удаляем все классы show-card-* на всякий случай
-			for (let i = 0; i < totalCards; i++) {
-				carousel.classList.remove(`show-card-${i}`);
-			}
-			// Добавляем класс для текущего индекса
-			carousel.classList.add(`show-card-${currentIndex}`);
-		}
-
-		// Инициализация - показываем первую карточку
-		updateCarousel();
-
-		// --- Обработка свайпов ---
-		let touchStartX = 0;
-		let touchEndX = 0;
-
-		// Функция для обработки начала касания
-		function handleTouchStart(event) {
-			touchStartX = event.changedTouches[0].screenX;
-		}
-
-		// Функция для обработки окончания касания
-		function handleTouchEnd(event) {
-			touchEndX = event.changedTouches[0].screenX;
-			handleSwipe();
-		}
-
-		// Функция для определения направления свайпа и смены карточки
-		function handleSwipe() {
-		console.log(currentIndex);
-			const swipeThreshold = 50; // Минимальное расстояние для срабатывания свайпа в пикселях
-
-			if (touchEndX < touchStartX && (touchStartX - touchEndX) > swipeThreshold) {
-				// Свайп влево (смотрим на следующую карточку)
-				if (currentIndex < totalCards - 1) {
-					currentIndex++;
-					updateCarousel();
-				}
-			}
-
-			if (touchEndX > touchStartX && (touchEndX - touchStartX) > swipeThreshold) {
-				// Свайп вправо (смотрим на предыдущую карточку)
-				if (currentIndex > 0) {
-					currentIndex--;
-					updateCarousel();
-				}
-			}
-		}
-
-		// Добавляем обработчики событий касания к карусели
-		carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
-		carousel.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-	</script>
 </body>
 </html>
