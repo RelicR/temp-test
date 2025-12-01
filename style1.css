@@ -105,6 +105,11 @@ button {
 	.game-main {
 		padding: 3rem 0;
 	}
+	
+	.game-menu {
+		align-items: center; /* Оставить для размера карточек по соотношению или во весь контейнер */
+		overflow:hidden;
+	}
 
     /* Изменяем сетку для мобильных устройств */
     .game-carousel {
@@ -114,6 +119,8 @@ button {
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
 		overflow-x: scroll;
+		justify-content: flex-start; /* Чтобы была видна первая краточка */
+		align-items: center;
     }
 
 
@@ -121,7 +128,7 @@ button {
     .game-card {
 		order: 1;
 		flex: 1 0 auto;
-		width: 50vw;
+		width: 100vw;
 		scroll-snap-align: center;
         scroll-snap-stop: always;
         /* opacity: 0.3; /* Делаем неактивные карточки полупрозрачными */
